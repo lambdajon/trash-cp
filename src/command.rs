@@ -1,4 +1,3 @@
-
 // TODO: implement command option struct
 #[derive(Debug, Clone)]
 pub struct CopyCommand {
@@ -30,4 +29,3 @@ impl CopyCommand {
         // need implement execution of copy command
     }
 }
-

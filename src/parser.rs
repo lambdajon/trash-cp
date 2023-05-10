@@ -23,7 +23,6 @@ impl FromStr for OptionType {
     }
 }
 
-
 fn is_option(str: &String) -> bool {
     if (str.starts_with("-") && str.len() > 1) {
         let mut is_match = false;
