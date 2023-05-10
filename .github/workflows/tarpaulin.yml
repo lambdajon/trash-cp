@@ -3,7 +3,7 @@ name: tarpaulin
 on:
   push:
     branches:
-      - master
+      - main
 jobs:
   check:
     runs-on: ubuntu-20.04
