@@ -30,21 +30,26 @@ impl CopyCommand {
     }
 }
 
-
 #[cfg(test)]
 mod command_tests {
     use super::CopyCommand;
 
     #[test]
     fn chek_build_new_command() {
-        let com = CopyCommand::new(&String::from("/home/trash"), &String::from("/home/trash/app"));
+        let com = CopyCommand::new(
+            &String::from("/home/trash"),
+            &String::from("/home/trash/app"),
+        );
 
-        assert_eq!(com, CopyCommand {
-            source: String::from("/home/trash"),
-            dest: String::from("/home/trash/app"),
-            is_interactive: false,
-            is_recursive: false,
-            verbose: false,
-        })
+        assert_eq!(
+            com,
+            CopyCommand {
+                source: String::from("/home/trash"),
+                dest: String::from("/home/trash/app"),
+                is_interactive: false,
+                is_recursive: false,
+                verbose: false,
+            }
+        )
     }
 }
