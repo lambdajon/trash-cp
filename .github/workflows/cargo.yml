@@ -1,22 +1,23 @@
-name: Rust
-
+name: cargo
 on:
   push:
-    branches: [ "main" ]
   pull_request:
-    branches: [ "main" ]
-
+concurrency:
+  group: ${{ github.ref }}
+  cancel-in-progress: true
 env:
   CARGO_TERM_COLOR: always
-
 jobs:
   build:
-
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
 
     steps:
     - uses: actions/checkout@v3
-    - name: Build
-      run: cargo build --verbose
-    - name: Run tests
-      run: cargo test --verbose
+    - uses: actions-rs/toolchain@v1
+      with:
+        toolchain: stable
+    - run: cargo --color=never test --all-features -vv -- --nocapture
+    - run: cargo --color=never test --release --all-features -vv -- --nocapture
+    - run: cargo --color=never fmt --check
+    - run: cargo --color=never doc --no-deps
+    - run: cargo --color=never clippy -- --no-deps
