@@ -36,17 +36,57 @@ mod command_tests {
 
     #[test]
     fn chek_build_new_command() {
-        let com = CopyCommand::new(
+        let cmd = CopyCommand::new(
             &String::from("/home/trash"),
             &String::from("/home/trash/app"),
         );
 
         assert_eq!(
-            com,
+            cmd,
             CopyCommand {
                 source: String::from("/home/trash"),
                 dest: String::from("/home/trash/app"),
                 is_interactive: false,
+                is_recursive: false,
+                verbose: false,
+            }
+        )
+    }
+
+    #[test]
+    fn chek_build_new_command_recursive_option() {
+        let mut cmd = CopyCommand::new(
+            &String::from("/home/trash"),
+            &String::from("/home/trash/app"),
+        );
+
+        cmd.recursive(true);
+        assert_eq!(
+            cmd,
+            CopyCommand {
+                source: String::from("/home/trash"),
+                dest: String::from("/home/trash/app"),
+                is_interactive: false,
+                is_recursive: true,
+                verbose: false,
+            }
+        )
+    }
+
+    #[test]
+    fn chek_build_new_command_interactive_option() {
+        let mut cmd = CopyCommand::new(
+            &String::from("/home/trash"),
+            &String::from("/home/trash/app"),
+        );
+
+        cmd.interactive(true);
+        assert_eq!(
+            cmd,
+            CopyCommand {
+                source: String::from("/home/trash"),
+                dest: String::from("/home/trash/app"),
+                is_interactive: true,
                 is_recursive: false,
                 verbose: false,
             }
